@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Financial Plot</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Add a gray background color with some padding */
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f1f1f1;
+    }
+
+    /* Header/Blog Title */
+    .header {
+      padding: 30px;
+      font-size: 40px;
+      text-align: center;
+      background: white;
+    }
+
+    /* Create two unequal columns that floats next to each other */
+    /* Left column */
+    .leftcolumn {
+      float: left;
+      width: 18%;
+    }
+
+    /*Centre column */
+    .centrecolumn {
+      float: left;
+      width: 40%;
+      height: 60%
+    }
+
+
+    /* Right column */
+    .rightcolumn {
+      float: left;
+      width: 30%;
+      padding-left: 20px;
+    }
+
+    /* Add a card effect for articles */
+    .card {
+      background-color: white;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 20px;
+      text-align: center;
+      background: #ddd;
+      margin-top: 20px;
+    }
+
+    #mCountry select {
+      width: 100px;
+    }
+
+
+
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 120px) {
+
+      .leftcolumn,
+      .centrecolumn,
+      .rightcolumn {
+        width: 100%;
+        padding: 0;
+      }
+    }
+    #editableDiv {
+    width: 347px;
+    height: 40px;
+    
+}
+
+#editText {
+    width: 100%;
+    height: 100%;
+    background-color: lightgray;
+    font-weight: bold
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 3px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.select-css {
+	display: block;
+	font-size: 16px;
+	font-family: sans-serif;
+	font-weight: 700;
+	color: #444;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
+}
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+</head>
+
+<body></body>
+
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<div class="row" id=mainFrameRow>
+  <div class="leftcolumn">
+    <h2>Emissions</h2>
+    <div
+      style="text-align: center;max-width:50%;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+      Select countries</div>
+
+    <!-- Initialize a select button -->
+    <select id="selectButton"></select>
+ 
+    <!--<select id="Country"></select>--?
+ 
+
+    <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+    <form action="emissionBysector.html">
+        <input type="submit" value="Emission By Sector" />
+      </form>
+  
+      <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+      <form action="CO2Emission.html">
+        <input type="submit" value="CO2 Emissions at a glance" />
+      </form>
+  
+      <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+      <form action="plotly_bubble_CO2Emsn_GDP.html">
+        <input type="submit" value="Prosperity , Population and CO2 emission" />
+      </form>
+      
+      <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+      <form action="map_CO2Emsn_2017.html">
+        <input type="submit" value="Map View CO2 emissions - 2017" />
+      </form>
+  
+       <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+       <form action="x.html">
+          <input type="submit" value="Path to economic Development" />
+        </form>
+  
+        <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+        <form action="area2.html">
+          <input type="submit" value="Area Chart - Emission By  Sector" />
+        </form>
+  
+        <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+        <form action="y.html">
+          <input type="submit" value="Its Getting Better" />
+        </form>
+        
+        <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+        <form action="ML_slider.html">
+          <input type="submit" value="ML-Sliders" />
+        </form>
+  <!-- Color Scale -->
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+  </div>
+
+  <!--------------------------------------------------------------->
+  <!----------------------------------------------------------------->
+
+  <div class="row" id=centreRow>
+   
+      <h4>CO2 emission in tons  by econmic sectos</h4>
+    
+    <!--------------------------------------------------------------->
+  <!----------------------------------------------------------------->
+  <div class="centrecolumn" id=centreColumn1>
+
+   
+    <!-- Create a div where the graph will take place -->
+    <div id="my_dataviz"></div>
+
+    <!--<p>Some text..</p>
+    //<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco.</p>-->
+
+  </div>
+ 
+  <div class="rightcolumn" id=rightColumn1>
+
+    
+    <!-- Create a div where the graph will take place -->
+    <div id="myplot"></div>
+
+
+</div>
+
+<script>
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 60, right: 230, bottom: 50, left: 95},
+        width = 600 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+    
+    // append the svg object to the body of the page
+    var svg = d3.select("#myplot")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+
+  //--------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------
+  //Read the data
+  //--------------------------------------------------------------------------------------
+  //--------------------------------------------------------------------------------------
+    
+    // Parse the Data
+    //d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered_wide.csv", function(data) {
+      d3.csv("../db/emsnBySectorByCountry.csv", function(data) {
+    
+    
+      //////////
+      // GENERAL //
+      //////////
+        // List of groups (here I have one group per column)
+        var allGroup = d3.map(data, function (d) { return (d.countryName) }).keys()
+
+    // add the options to the button
+    d3.select("#selectButton")
+      .selectAll('myOptions')
+      .data(allGroup)
+      .enter()
+      .append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+
+             // A function that update the chart
+    function update(selectedGroup) {
+      
+      svg.selectAll("*").remove();
+
+      // List of groups = header of the csv files
+      var keys = data.columns.slice(1)
+    
+      // color palette
+      var color = d3.scaleOrdinal()
+        .domain(keys)
+        .range(d3.schemeSet2);
+      // Create new data with the selection?
+
+      var dataFilter = data.filter(function (d) { return d.countryName ==  selectedGroup })
+    
+      //stack the data?
+      var stackedData = d3.stack()
+        .keys(keys)
+        (dataFilter)
+    
+    
+    
+      //////////
+      // AXIS //
+      //////////
+    
+      // Add X axis
+      var x = d3.scaleLinear()
+        .domain(d3.extent(data, function(d) { return d.year; }))
+        .range([ 0, width ]);
+      var xAxis = svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).ticks(5))
+    
+      // Add X axis label:
+      svg.append("text")
+          .attr("text-anchor", "end")
+          .attr("x", width/2 + 20 )
+          .attr("y", height+40  )
+          .text("Time (year)");
+
+
+      // Add Y axis
+      //largeEmittants =["Chinae", "India", "United States", "United Arabs Emirates"]
+      //if ( largeEmittants.exists(selectedGroup)) {
+        if ( selectedGroup == "Australia" ||  selectedGroup == "United States" ||  selectedGroup == "USSR"||  selectedGroup == "India"  || selectedGroup == "Russia" || selectedGroup == "Australia & New Zealand") {
+          var y = d3.scaleLinear()
+          .domain([0, 6000000000])
+          .range([ height, 0 ]);
+        
+          } else if 
+          ( selectedGroup == "Brazil" ||  selectedGroup == "Indonesia" ||  selectedGroup == "Canada"||  selectedGroup == "USSR"||  selectedGroup == "Western Europe"  ) {
+          var y = d3.scaleLinear()
+          .domain([0, 4000000000])
+          .range([ height, 0 ]);
+        
+          }  else if 
+          ( selectedGroup == "Eastern Africa" || selectedGroup == "Southern Europe" ||  selectedGroup == "Germany" ||  selectedGroup == "Japan"|| selectedGroup == "Northern Europe" ||  selectedGroup == "Southern Europe") {
+          var y = d3.scaleLinear()
+          .domain([0, 4000000000])
+          .range([ height, 0 ]);
+        
+          } else if  ( selectedGroup == "China" ) {
+          var y = d3.scaleLinear()
+          .domain([0, 11000000000])
+          .range([ height, 0 ]);
+        
+          }  else 
+          {
+          var y = d3.scaleLinear()
+          .domain([0, 1000000000])
+          .range([ height, 0 ]);
+        
+          }
+
+        svg.append("g")
+        .call(d3.axisLeft(y).ticks(5))
+    
+        
+        // text label for the y axis
+        svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 5)
+      .attr("x",0 - (height / 2) -15 )
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("CO2 emissions in metric tons");      
+
+    
+    
+      //////////
+      // BRUSHING AND CHART //
+      //////////
+    
+      // Add a clipPath: everything out of this area won't be drawn.
+      var clip = svg.append("defs").append("svg:clipPath")
+          .attr("id", "clip")
+          .append("svg:rect")
+          .attr("width", width )
+          .attr("height", height )
+          .attr("x", 0)
+          .attr("y", 0);
+    
+      // Add brushing
+      var brush = d3.brushX()                 // Add the brush feature using the d3.brush function
+          .extent( [ [0,0], [width,height] ] ) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+          .on("end", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
+    
+      // Create the scatter variable: where both the circles and the brush take place
+      var areaChart = svg.append('g')
+        .attr("clip-path", "url(#clip)")
+    
+      // Area generator
+      var area = d3.area()
+        .x(function(d) { return x(d.data.year); })
+        .y0(function(d) { return y(d[0]); })
+        .y1(function(d) { return y(d[1]); })
+    
+      // Show the areas
+      areaChart
+        .selectAll("mylayers")
+        .data(stackedData)
+        .enter()
+        .append("path")
+          .attr("class", function(d) { return "myArea " + d.key })
+          .style("fill", function(d) { return color(d.key); })
+          .attr("d", area)
+    
+      // Add the brushing
+      areaChart
+        .append("g")
+          .attr("class", "brush")
+          .call(brush);
+    
+      var idleTimeout
+      function idled() { idleTimeout = null; }
+    
+      // A function that update the chart for given boundaries
+      function updateChart() {
+    
+        extent = d3.event.selection
+    
+        // If no selection, back to initial coordinate. Otherwise, update X axis domain
+        if(!extent){
+          if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
+          x.domain(d3.extent(data, function(d) { return d.year; }))
+        }else{
+          x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
+          areaChart.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
+        }
+    
+        // Update axis and area position
+        xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(5))
+        areaChart
+          .selectAll("path")
+          .transition().duration(1000)
+          .attr("d", area)
+        }
+    
+    
+    
+        //////////
+        // HIGHLIGHT GROUP //
+        //////////
+    
+        // What to do when one group is hovered
+        var highlight = function(d){
+          console.log(d)
+          // reduce opacity of all groups
+          d3.selectAll(".myArea").style("opacity", .1)
+          // expect the one that is hovered
+          d3.select("."+d).style("opacity", 1)
+        }
+    
+        // And when it is not hovered anymore
+        var noHighlight = function(d){
+          d3.selectAll(".myArea").style("opacity", 1)
+        }
+    
+    
+    
+        //////////
+        // LEGEND //
+        //////////
+    
+        // Add one dot in the legend for each name.
+        var size = 20
+        svg.selectAll("myrect")
+          .data(keys)
+          .enter()
+          .append("rect")
+            .attr("x", 400)
+            .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
+            .attr("width", size)
+            .attr("height", size)
+            .style("fill", function(d){ return color(d)})
+            .on("mouseover", highlight)
+            .on("mouseleave", noHighlight)
+    
+        // Add one dot in the legend for each name.
+        svg.selectAll("mylabels")
+          .data(keys)
+          .enter()
+          .append("text")
+            .attr("x", 400 + size*1.2)
+            .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
+            .style("fill", function(d){ return color(d)})
+            .text(function(d){ return d})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+            .on("mouseover", highlight)
+            .on("mouseleave", noHighlight)
+
+      // Create new data with the selection?
+      var dataFilter = data.filter(function (d) { return d.countryName == selectedGroup })
+         // Add a clipPath: everything out of this area won't be drawn.
+      var clip = svg.append("defs").append("svg:clipPath")
+          .attr("id", "clip")
+          .append("svg:rect")
+          .attr("width", width )
+          .attr("height", height )
+          .attr("x", 0)
+          .attr("y", 0);
+    
+      // Add brushing
+      var brush = d3.brushX()                 // Add the brush feature using the d3.brush function
+          .extent( [ [0,0], [width,height] ] ) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+          .on("end", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
+    
+      // Create the scatter variable: where both the circles and the brush take place
+      var areaChart = svg.append('g')
+        .attr("clip-path", "url(#clip)")
+    
+      // Area generator
+      var area = d3.area()
+        .x(function(d) { return x(d.data.year); })
+        .y0(function(d) { return y(d[0]); })
+        .y1(function(d) { return y(d[1]); })
+    
+      // Show the areas
+      areaChart
+        .selectAll("mylayers")
+        .data(stackedData)
+        .enter()
+        .append("path")
+          .attr("class", function(d) { return "myArea " + d.key })
+          .style("fill", function(d) { return color(d.key); })
+          .attr("d", area)
+    
+      // Add the brushing
+      areaChart
+        .append("g")
+          .attr("class", "brush")
+          .call(brush);
+    
+    
+      }
+
+// When the button is changed, run the updateChart function
+d3.select("#selectButton").on("change", function (d) {
+// recover the option that has been chosen
+var selectedOption = d3.select(this).property("value")
+// run the updateChart function with this selected option
+update(selectedOption)
+
+})
+    })
+    </script>
+</body>
+
+</html>

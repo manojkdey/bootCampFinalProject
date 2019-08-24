@@ -1,0 +1,12 @@
+select countryName, Year, OtherSources from emsnBySector;
+				 				
+
+select countryName, Year, InternationalBankers  from emsnBySector;
+select countryName, Year, Waste  from emsnBySector;
+select countryName, Year, Industry  from emsnBySector;
+select countryName, Year, Residential_commercial  from emsnBySector;
+select countryName, Year, Transport  from emsnBySector;
+select countryName, Year, Agriculture  from emsnBySector;
+select countryName, Year, Forestry  from emsnBySector;
+select countryName, Year, LandUseSources from emsnBySector;
+select countryName, Year, Energy  from emsnBySector

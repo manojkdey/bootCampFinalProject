@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Add a gray background color with some padding */
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f1f1f1;
+    }
+
+    /* Header/Blog Title */
+    .header {
+      padding: 30px;
+      font-size: 40px;
+      text-align: center;
+      background: white;
+    }
+
+    /* Create two unequal columns that floats next to each other */
+    /* Left column */
+    .leftcolumn {
+      float: left;
+      width: 12%;
+    }
+
+    /*Centre column */
+    .centrecolumn {
+      float: left;
+      width: 65%;
+    }
+
+
+    /* Right column */
+    .rightcolumn {
+      float: left;
+      width: 10%;
+      padding-left: 20px;
+    }
+
+    /* Fake image */
+    .fakeimg {
+      background-color: #aaa;
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* Add a card effect for articles */
+    .card {
+      background-color: white;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 20px;
+      text-align: center;
+      background: #ddd;
+      margin-top: 20px;
+    }
+
+
+    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 120px) {
+
+      .leftcolumn,
+      .centrecolumn,
+      .rightcolumn {
+        width: 100%;
+        padding: 0;
+      }
+    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+    <header><script src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script></header>
+  </style>
+</head>
+
+
+
+
+<div class="row">
+  <div class="leftcolumn">
+    <!--<div class="card" style="background-color: lightgray">-->
+    <h2>Emissions</h2>
+    <div
+    style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">REGIONS</div>
+    <h2>Select Country</h2>
+    <form class="form-inline">
+    <div class="form-group">
+      <label for="stockInput">Stock</label>
+       <br><br>
+      <option value="dataset1">United States</option>
+      <option value="dataset1">Afghanistan</option>
+      <option value="dataset2">Albania</option>
+      <option value="dataset3">Algeria</option>
+      <option value="dataset4">American Samoa</option>
+      <option value="dataset5">Andorra</option>
+      <option value="dataset6">Angola</option>
+      <option value="dataset7">Antigua and Barbuda</option>
+      <option value="dataset8">Arab World</option>
+      <option value="dataset9">Argentina</option>
+      <option value="dataset10">Armenia</option>
+      <option value="dataset11">Aruba</option>
+      <option value="dataset12">Australia</option>
+      <option value="dataset13">Austria</option>
+      <option value="dataset14">Azerbaijan</option>
+      <option value="dataset15">Bahamas, The</option>
+      <option value="dataset16">Bahrain</option>
+      <option value="dataset17">Bangladesh</option>
+      <option value="dataset18">Barbados</option>
+      <option value="dataset19">Belarus</option>
+      <option value="dataset20">Belgium</option>
+      <option value="dataset21">Belize</option>
+      <option value="dataset22">Benin</option>
+      <option value="dataset23">Bermuda</option>
+      <option value="dataset24">Bhutan</option>
+      <option value="dataset25">Bolivia</option>
+      <option value="dataset26">Bosnia and Herzegovina</option>
+      <option value="dataset27">Botswana</option>
+      <option value="dataset28">Brazil</option>
+      <option value="dataset29">British Virgin Islands</option>
+      <option value="dataset30">Brunei Darussalam</option>
+      <option value="dataset31">Bulgaria</option>
+      <option value="dataset32">Burkina Faso</option>
+      <option value="dataset33">Burundi</option>
+      <option value="dataset34">Cabo Verde</option>
+      <option value="dataset35">Cambodia</option>
+      <option value="dataset36">Cameroon</option>
+      <option value="dataset37">Canada</option>
+      <option value="dataset38">Caribbean small states</option>
+      <option value="dataset39">Cayman Islands</option>
+      <option value="dataset40">Central African Republic</option>
+      <option value="dataset41">Central Europe and the Baltics</option>
+      <option value="dataset42">Chad</option>
+      <option value="dataset43">Channel Islands</option>
+      <option value="dataset44">Chile</option>
+      <option value="dataset45">China</option>
+      <option value="dataset46">Colombia</option>
+      <option value="dataset47">Comoros</option>
+      <option value="dataset48">Congo, Dem. Rep.</option>
+      <option value="dataset49">Congo, Rep.</option>
+      <option value="dataset50">Costa Rica</option>
+      <option value="dataset51">Cote d'Ivoire</option>
+      <option value="dataset52">Croatia</option>
+      <option value="dataset53">Cuba</option>
+      <option value="dataset54">Curacao</option>
+      <option value="dataset55">Cyprus</option>
+      <option value="dataset56">Czech Republic</option>
+      <option value="dataset57">Denmark</option>
+      <option value="dataset58">Djibouti</option>
+      <option value="dataset59">Dominica</option>
+      <option value="dataset60">Dominican Republic</option>
+      <option value="dataset61">Early-demographic dividend</option>
+      <option value="dataset62">East Asia & Pacific</option>
+      <option value="dataset63">East Asia & Pacific (IDA & IBRD countries)</option>
+      <option value="dataset64">East Asia & Pacific (excluding high income)</option>
+      <option value="dataset65">Ecuador</option>
+      <option value="dataset66">Egypt, Arab Rep.</option>
+      <option value="dataset67">El Salvador</option>
+      <option value="dataset68">Equatorial Guinea</option>
+      <option value="dataset69">Eritrea</option>
+      <option value="dataset70">Estonia</option>
+      <option value="dataset71">Eswatini</option>
+      <option value="dataset72">Ethiopia</option>
+      <option value="dataset73">Euro area</option>
+      <option value="dataset74">Europe & Central Asia</option>
+      <option value="dataset75">Europe & Central Asia (IDA & IBRD countries)</option>
+      <option value="dataset76">Europe & Central Asia (excluding high income)</option>
+      <option value="dataset77">European Union</option>
+      <option value="dataset78">Faroe Islands</option>
+      <option value="dataset79">Fiji</option>
+      <option value="dataset80">Finland</option>
+      <option value="dataset81">Fragile and conflict affected situations</option>
+      <option value="dataset82">France</option>
+      <option value="dataset83">French Polynesia</option>
+      <option value="dataset84">Gabon</option>
+      <option value="dataset85">Gambia, The</option>
+      <option value="dataset86">Georgia</option>
+      <option value="dataset87">Germany</option>
+      <option value="dataset88">Ghana</option>
+      <option value="dataset89">Gibraltar</option>
+      <option value="dataset90">Greece</option>
+      <option value="dataset91">Greenland</option>
+      <option value="dataset92">Grenada</option>
+      <option value="dataset93">Guam</option>
+      <option value="dataset94">Guatemala</option>
+      <option value="dataset95">Guinea</option>
+      <option value="dataset96">Guinea-Bissau</option>
+      <option value="dataset97">Guyana</option>
+      <option value="dataset98">Haiti</option>
+      <option value="dataset99">Heavily indebted poor countries (HIPC)</option>
+      <option value="dataset100">High income</option>
+      <option value="dataset101">Honduras</option>
+      <option value="dataset102">Hong Kong SAR, China</option>
+      <option value="dataset103">Hungary</option>
+      <option value="dataset104">IBRD only</option>
+      <option value="dataset105">IDA & IBRD total</option>
+      <option value="dataset106">IDA blend</option>
+      <option value="dataset107">IDA only</option>
+      <option value="dataset108">IDA total</option>
+      <option value="dataset109">Iceland</option>
+      <option value="dataset110">India</option>
+      <option value="dataset111">Indonesia</option>
+      <option value="dataset112">Iran, Islamic Rep.</option>
+      <option value="dataset113">Iraq</option>
+      <option value="dataset114">Ireland</option>
+      <option value="dataset115">Isle of Man</option>
+      <option value="dataset116">Israel</option>
+      <option value="dataset117">Italy</option>
+      <option value="dataset118">Jamaica</option>
+      <option value="dataset119">Japan</option>
+      <option value="dataset120">Jordan</option>
+      <option value="dataset121">Kazakhstan</option>
+      <option value="dataset122">Kenya</option>
+      <option value="dataset123">Kiribati</option>
+      <option value="dataset124">Korea, Dem. People’s Rep.</option>
+      <option value="dataset125">Korea, Rep.</option>
+      <option value="dataset126">Kosovo</option>
+      <option value="dataset127">Kuwait</option>
+      <option value="dataset128">Kyrgyz Republic</option>
+      <option value="dataset129">Lao PDR</option>
+      <option value="dataset130">Late-demographic dividend</option>
+      <option value="dataset131">Latin America & Caribbean</option>
+      <option value="dataset132">Latin America & Caribbean (excluding high income)</option>
+      <option value="dataset133">Latin America & the Caribbean (IDA & IBRD countries)</option>
+      <option value="dataset134">Latvia</option>
+      <option value="dataset135">Least developed countries: UN classification</option>
+      <option value="dataset136">Lebanon</option>
+      <option value="dataset137">Lesotho</option>
+      <option value="dataset138">Liberia</option>
+      <option value="dataset139">Libya</option>
+      <option value="dataset140">Liechtenstein</option>
+      <option value="dataset141">Lithuania</option>
+      <option value="dataset142">Low & middle income</option>
+      <option value="dataset143">Low income</option>
+      <option value="dataset144">Lower middle income</option>
+      <option value="dataset145">Luxembourg</option>
+      <option value="dataset146">Macao SAR, China</option>
+      <option value="dataset147">Madagascar</option>
+      <option value="dataset148">Malawi</option>
+      <option value="dataset149">Malaysia</option>
+      <option value="dataset150">Maldives</option>
+      <option value="dataset151">Mali</option>
+      <option value="dataset152">Malta</option>
+      <option value="dataset153">Marshall Islands</option>
+      <option value="dataset154">Mauritania</option>
+      <option value="dataset155">Mauritius</option>
+      <option value="dataset156">Mexico</option>
+      <option value="dataset157">Micronesia, Fed. Sts.</option>
+      <option value="dataset158">Middle East & North Africa</option>
+      <option value="dataset159">Middle East & North Africa (IDA & IBRD countries)</option>
+      <option value="dataset160">Middle East & North Africa (excluding high income)</option>
+      <option value="dataset161">Middle income</option>
+      <option value="dataset162">Moldova</option>
+      <option value="dataset163">Monaco</option>
+      <option value="dataset164">Mongolia</option>
+      <option value="dataset165">Montenegro</option>
+      <option value="dataset166">Morocco</option>
+      <option value="dataset167">Mozambique</option>
+      <option value="dataset168">Myanmar</option>
+      <option value="dataset169">Namibia</option>
+      <option value="dataset170">Nauru</option>
+      <option value="dataset171">Nepal</option>
+      <option value="dataset172">Netherlands</option>
+      <option value="dataset173">New Caledonia</option>
+      <option value="dataset174">New Zealand</option>
+      <option value="dataset175">Nicaragua</option>
+      <option value="dataset176">Niger</option>
+      <option value="dataset177">Nigeria</option>
+      <option value="dataset178">North America</option>
+      <option value="dataset179">North Macedonia</option>
+      <option value="dataset180">Northern Mariana Islands</option>
+      <option value="dataset181">Norway</option>
+      <option value="dataset182">Not classified</option>
+      <option value="dataset183">OECD members</option>
+      <option value="dataset184">Oman</option>
+      <option value="dataset185">Other small states</option>
+      <option value="dataset186">Pacific island small states</option>
+      <option value="dataset187">Pakistan</option>
+      <option value="dataset188">Palau</option>
+      <option value="dataset189">Panama</option>
+      <option value="dataset190">Papua New Guinea</option>
+      <option value="dataset191">Paraguay</option>
+      <option value="dataset192">Peru</option>
+      <option value="dataset193">Philippines</option>
+      <option value="dataset194">Poland</option>
+      <option value="dataset195">Portugal</option>
+      <option value="dataset196">Post-demographic dividend</option>
+      <option value="dataset197">Pre-demographic dividend</option>
+      <option value="dataset198">Puerto Rico</option>
+      <option value="dataset199">Qatar</option>
+      <option value="dataset200">Romania</option>
+      <option value="dataset201">Russian Federation</option>
+      <option value="dataset202">Rwanda</option>
+      <option value="dataset203">Samoa</option>
+      <option value="dataset204">San Marino</option>
+      <option value="dataset205">Sao Tome and Principe</option>
+      <option value="dataset206">Saudi Arabia</option>
+      <option value="dataset207">Senegal</option>
+      <option value="dataset208">Serbia</option>
+      <option value="dataset209">Seychelles</option>
+      <option value="dataset210">Sierra Leone</option>
+      <option value="dataset211">Singapore</option>
+      <option value="dataset212">Sint Maarten (Dutch part)</option>
+      <option value="dataset213">Slovak Republic</option>
+      <option value="dataset214">Slovenia</option>
+      <option value="dataset215">Small states</option>
+      <option value="dataset216">Solomon Islands</option>
+      <option value="dataset217">Somalia</option>
+      <option value="dataset218">South Africa</option>
+      <option value="dataset219">South Asia</option>
+      <option value="dataset220">South Asia (IDA & IBRD)</option>
+      <option value="dataset221">South Sudan</option>
+      <option value="dataset222">Spain</option>
+      <option value="dataset223">Sri Lanka</option>
+      <option value="dataset224">St. Kitts and Nevis</option>
+      <option value="dataset225">St. Lucia</option>
+      <option value="dataset226">St. Martin (French part)</option>
+      <option value="dataset227">St. Vincent and the Grenadines</option>
+      <option value="dataset228">Sub-Saharan Africa</option>
+      <option value="dataset229">Sub-Saharan Africa (IDA & IBRD countries)</option>
+      <option value="dataset230">Sub-Saharan Africa (excluding high income)</option>
+      <option value="dataset231">Sudan</option>
+      <option value="dataset232">Suriname</option>
+      <option value="dataset233">Sweden</option>
+      <option value="dataset234">Switzerland</option>
+      <option value="dataset235">Syrian Arab Republic</option>
+      <option value="dataset236">Tajikistan</option>
+      <option value="dataset237">Tanzania</option>
+      <option value="dataset238">Thailand</option>
+      <option value="dataset239">Timor-Leste</option>
+      <option value="dataset240">Togo</option>
+      <option value="dataset241">Tonga</option>
+      <option value="dataset242">Trinidad and Tobago</option>
+      <option value="dataset243">Tunisia</option>
+      <option value="dataset244">Turkey</option>
+      <option value="dataset245">Turkmenistan</option>
+      <option value="dataset246">Turks and Caicos Islands</option>
+      <option value="dataset247">Tuvalu</option>
+      <option value="dataset248">Uganda</option>
+      <option value="dataset249">Ukraine</option>
+      <option value="dataset250">United Arab Emirates</option>
+      <option value="dataset251">United Kingdom</option>
+      <option value="dataset252">United States</option>
+      <option value="dataset253">Upper middle income</option>
+      <option value="dataset254">Uruguay</option>
+      <option value="dataset255">Uzbekistan</option>
+      <option value="dataset256">Vanuatu</option>
+      <option value="dataset257">Venezuela, RB</option>
+      <option value="dataset258">Vietnam</option>
+      <option value="dataset259">Virgin Islands (U.S.)</option>
+      <option value="dataset260">West Bank and Gaza</option>
+      <option value="dataset261">World</option>
+      <option value="dataset262">Yemen, Rep.</option>
+      <option value="dataset263">Zambia</option>
+      <option value="dataset264">Zimbabwe</option>
+    </div>
+        <button id="submit" type="submit" class="btn btn-default">Plot Stock</button>
+      </form>
+
+      <!--Jav script to etch list of countries to populate country drop down -->
+
+
+
+      <h2>COUNTRIES</h2>
+      <h5>Title description, Sep 2, 2017</h5>
+      <!--<div style="text-align: center;display: inline-block;width: 100px;height:30px;border:1px solid #000;">Type</div>-->
+      <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+
+      </form>
+
+
+      <!--<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>-->
+      <h5>Select Emission type and unit</h5>
+      <div
+        style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+        TYPE</div>
+      <div
+        style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+        UNIT</div>
+      <p>Select Countries or blocks</p>
+      <div
+        style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+        REGIONS</div>
+      <div
+        style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+        GROUPS</div>
+      <div
+        style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+        RANKING</div>
+
+  </div>
+
+
+
+  <div class="centrecolumn">
+    <div id="myPlot"></div>
+    <h2>TITLE HEADING</h2>
+    <h5>Title description, Dec 7, 2017</h5>
+    <div class="fakeimg" style="height:200px;">Image</div>
+    <p>Some text..</p>
+    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+    </p>
+  </div>
+  <div class="card">
+    <h2>TITLE HEADING</h2>
+    <h5>Title description, Sep 2, 2017</h5>
+    <div class="fakeimg" style="height:200px;">
+      <script>
+        //get columns start and label it as startval, open-> openval, etc from the appropriate table
+        // when the id = what we define it as below
+        let sql = 'SELECT DISTINCT CountryName  FROM GlobalPercapCO2Emsn';
+        db.get(sql, (err, row) => {
+          if (err) {
+            return console.error(err.message);
+          }
+          return row
+            ? console.log(row.startval, row.openval, row.highval)
+            : console.log(`No values found with the id ${id}`);
+
+        });
+        // Close the database
+        db.close((err) => {
+          if (err) {
+            console.error(err.message);
+          }
+          console.log('Close the database connection.');
+        });
+        <script>
+        </div>
+          <p>Some text..</p>
+          <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      </div >
+  </div >
+    
+
+< !---------------------------------------------------->
+
+
+
+          <div class="rightcolumn">
+
+            <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">MAP VIEW</div>
+            <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">CHART VIEW</div>
+            <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">FOCUS</div>
+            <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">RANKING</div>
+            <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">TIME SERIES</div>
+            <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">BUBBLES</div>
+            <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+          </div>
+</div >
+< !---------------------------------------------------->
+
+< !--  < div id = "tools_misc" >
+          <img src="/bundles/wddcarbonatlas/img/triangle.png" id="triangle_misc">
+            <a id="misc_sources">SOURCES</a>
+            <a id="misc_tutorial">HELP</a>
+            <a id="misc_infos">METHODS</a>
+            <a id="misc_share">SHARE</a>
+            <a id="misc_download">DOWNLOAD</a>
+</div>
+          <!--< a href = "#" id = "exportdataset_csv" >export dataset csv</a >
+            <a href="#" id="exportdataset_xls">export dataset xls</a>
+            <a href="#" id="exportgraphic">export graphic</a>-->
+  < !--  </div > -->
+  < !--</div > -->
+  < !-- </div > -->
+  < !--</div > -->
+ 
+   
+  < !--  </div > -->
+  < !--</div > -->
+
+          <div class="footer">
+            <h2>Footer</h2>
+          </div>
+
+      <script type="text/javascript" src="/js/chart.js"></script>
+
+      </body>
+
+</html>

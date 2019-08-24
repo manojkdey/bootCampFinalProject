@@ -1,0 +1,28 @@
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'International bunkersTonnes' , [International bunkersTonnes] / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'OtherSourcesTonnes' , OtherSourcesTonnes / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'IndustryTonnes' , IndustryTonnes / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'WasteTonnes' , [WasteTonnes ] / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'Residential_commercialTonnes' , Residential_commercialTonnes / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'TransportTonnes' , [TransportTonnes ] / 1000  from emsnBySector;
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'AgricultureTonnes' , AgricultureTonnes / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'ForestryTonnes' , ForestryTonnes / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'LandUseSourcesTonnes' , LandUseSourcesTonnes / 1000  from emsnBySector;
+
+insert into transposeEmsnBySector (countryName, year,sector, [CO2EmsnKiloTons ]) 
+select countryName, Year, 'EnergyTonnes' , EnergyTonnes / 1000  from emsnBySector;

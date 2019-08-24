@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Add a gray background color with some padding */
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+  float: left;
+  width: 12%;
+}
+/*Centre column */
+.centrecolumn {   
+  float: left;
+  width: 65%;
+}
+
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 10%;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 120px) {
+  .leftcolumn,  .centrecolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+  <header>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
+  </header>
+
+</style>
+</head>
+<body>
+
+
+<div class="row">
+  <div class="leftcolumn">
+    <!--<div class="card" style="background-color: lightgray">-->
+      <h2>Emissions</h2>
+      <div style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">REGIONS</div>
+      <h2>Select Country</h2>
+      <label for="Couuntry">Country</label>
+
+<select id="Country" name="Country">
+	<option value="dataset1">United States</option>
+        
+<option value="dataset263">Zambia</option>
+<option value="dataset264">Zimbabwe</option>
+
+</select>
+
+<select name="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select> 
+
+    <select style="width: 90px;"id="Country" onchange="getData(this.value)">
+      <option value="volvo">Volvo</option>
+      
+        <!--Jav script to etch list of countries to populate country drop down -->
+
+
+    
+      <h2>COUNTRIES</h2>
+      <h5>Title description, Sep 2, 2017</h5>
+      <!--<div style="text-align: center;display: inline-block;width: 100px;height:30px;border:1px solid #000;">Type</div>-->
+      <form action="/action_page.php">
+        <input type="text" placeholder="Search.." name="search">
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+
+      </form>
+      
+      <div id="plot"></div>
+  <!-- <script src="../js/plots.js"></script>-->
+  <script src="../js/sqlitejs_1.js"></script>
+
+      <!--<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>-->
+      <h5>Select Emission type and unit</h5>
+      <div style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">TYPE</div>
+        <div style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">UNIT</div>
+      <!--<div class="card" style="background-color: gray, height:150px;">-->
+          <p>Select Countries or blocks</p>
+        <div style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">REGIONS</div>
+        <div style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">GROUPS</div>
+        <div style="text-align: center;width: 130px;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">RANKING</div>
+    <!--</div>-->
+    <!--</div>-->
+
+
+  </div>
+
+
+  <div class="centrecolumn">
+      <div class="card">
+        <h2>TITLE HEADING</h2>
+        <h5>Title description, Dec 7, 2017</h5>
+        <div class="fakeimg" style="height:200px;">Image</div>
+        <p>Some text..</p>
+        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      </div>
+      <div class="card">
+        <h2>TITLE HEADING</h2>
+        <h5>Title description, Sep 2, 2017</h5>
+        <div class="fakeimg" style="height:200px;">
+            <script>
+          //get columns start and label it as startval, open-> openval, etc from the appropriate table
+      // when the id = what we define it as below
+      let sql = 'SELECT DISTINCT CountryName  FROM GlobalPercapCO2Emsn';
+      db.get(sql, (err, row) => {
+        if (err) {
+          return console.error(err.message);
+        }
+      return row
+      ? console.log(row.startval, row.openval, row.highval)
+      : console.log(`No values found with the id ${id}`);
+ 
+});
+      // Close the database
+      db.close((err) => {
+        if (err) {
+          console.error(err.message);
+        }
+      console.log('Close the database connection.');
+      });
+      <script>
+        </div>
+        <p>Some text..</p>
+        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      </div>
+  </div>
+    
+
+<!---------------------------------------------------->
+
+
+
+<div class="rightcolumn">
+  
+    <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">MAP VIEW</div>
+    <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">CHART VIEW</div>
+    <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">FOCUS</div>
+    <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">RANKING</div>
+    <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">TIME SERIES</div>
+    <div style="text-align: center;width: 130px;height:35px;border:2px solid #000;background-color: lightgray; padding: 1px;">BUBBLES</div>
+    <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+  </div>
+</div>
+<!---------------------------------------------------->
+
+       <!--  <div id="tools_misc">
+          <img src="/bundles/wddcarbonatlas/img/triangle.png" id="triangle_misc">
+          <a id="misc_sources">SOURCES</a>
+          <a id="misc_tutorial">HELP</a>
+          <a id="misc_infos">METHODS</a>
+          <a id="misc_share">SHARE</a>
+          <a id="misc_download">DOWNLOAD</a>
+        </div>
+        <!--<a href="#" id="exportdataset_csv">export dataset csv</a>
+        <a href="#" id="exportdataset_xls">export dataset xls</a>
+        <a href="#" id="exportgraphic">export graphic</a>-->
+       <!--  </div>-->
+       <!--</div>-->
+     <!-- </div>-->
+    <!--</div>-->
+ 
+   
+<!--  </div>-->
+<!--</div>-->
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

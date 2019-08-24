@@ -1,0 +1,60 @@
+https://code.tutsplus.com/tutorials/building-a-multi-line-chart-using-d3js--cms-22935
+https://stackoverflow.com/questions/8689498/drawing-multiple-lines-in-d3-js
+
+
+
+https://developers.arcgis.com/javascript/3/jssamples/smartmapping_bycolor.html
+https://leafletjs.com/examples/choropleth/
+
+https://plot.ly/javascript/multiple-transforms/
+
+https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv
+
+https://plot.ly/python/aggregations/
+
+  <div class="row">
+      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, Ut enim ad minim
+          veniam, quis nostrud exercitation ullamco.</p>
+    </div>
+var para = document.createElement("p");
+var node = document.createTextNode("This is new.");
+para.appendChild(node);
+
+var node = document.createElement("LI");                 // Create a <li> node
+var textnode = document.createTextNode("Water");         // Create a text node
+node.appendChild(textnode);                              // Append the text to <li>
+document.getElementById("myList").appendChild(node);     // Append <li> to <ul> with id="myList" 
+
+CO2Emission.html
+
+http://bl.ocks.org/phoebebright/3098488
+
+create bootstrap sliders
+-------------------
+ if (selectedGroup == "China" || selectedGroup == "United Arabs Emirates" || selectedGroup == "Qatar"){
+      var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function (d) { return +d.Value; })])
+      .range([height, 0]);
+      svg.append("g")
+      .call(d3.axisLeft(y));
+  } else if (selectedGroup == "Brunei Darussalam"||selectedGroup == "Luxembourg" ||selectedGroup == "Trinidad and Tobago" ){
+    var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function (d) { return +d.Value; })])
+      .range([height, 0]);
+      svg.append("g")
+      .call(d3.axisLeft(y));
+  } else if (selectedGroup == "Bahamas, The"||selectedGroup == "Curacao" ||selectedGroup == "Kuwait" ){
+      var y = d3.scaleLinear()
+      .domain([0, d3.max(data, function (d) { return +d.Value; })])
+      .range([height, 0]);
+      svg.append("g")
+      .call(d3.axisLeft(y));
+  } else {var y = d3.scaleLinear
+      .domain([0, d3.max(data, function (d) { return +d.Value; })])
+      .range([height, 0]);
+      svg.append("g")
+      .call(d3.axisLeft(y));
+  }
+
+
+d3.select (id = idname ).text("some value")

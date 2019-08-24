@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Financial Plot</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Add a gray background color with some padding */
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #f1f1f1;
+        }
+
+        /* Header/Blog Title */
+        .header {
+            padding: 30px;
+            font-size: 40px;
+            text-align: center;
+            background: white;
+        }
+
+        /* Create two unequal columns that floats next to each other */
+        /* Left column */
+        .leftcolumn {
+            float: left;
+            width: 18%;
+        }
+
+        /*Centre column */
+        .centrecolumn {
+            float: left;
+            width: 60%;
+            margin-left: 35px
+        }
+
+
+        /* Right column */
+        .rightcolumn {
+            float: left;
+            width: 15%;
+        }
+
+        /* Add a card effect for articles */
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: #ddd;
+            margin-top: 20px;
+        }
+
+        #mCountry select {
+            width: 100px;
+        }
+
+
+
+        /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 120px) {
+
+            .leftcolumn,
+            .centrecolumn,
+            .rightcolumn {
+                width: 100%;
+                padding: 0;
+            }
+        }
+
+        #editableDiv {
+            width: 300px;
+            height: 40px;
+
+        }
+
+        #editText {
+            width: 100%;
+            height: 100%;
+            background-color: lightgray
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 3px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .select-css {
+            display: block;
+            font-size: 16px;
+            font-family: sans-serif;
+            font-weight: 700;
+            color: #444;
+            line-height: 1.3;
+            padding: .6em 1.4em .5em .8em;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            margin: 0;
+            border: 1px solid #aaa;
+            box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
+            border-radius: .5em;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+                linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+            background-repeat: no-repeat, repeat;
+            background-position: right .7em top 50%, 0 0;
+            background-size: .65em auto, 100%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+</head>
+
+<body>
+
+
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <div class="row">
+        <div class="leftcolumn">
+            <h2>Emissions</h2>
+            <div
+                style="text-align: center;max-width:50%;height:30px;border:2px solid #000;background-color: lightgray; padding: 1px;">
+                Select countries</div>
+
+            <!-- Initialize a select button -->
+            <select id="selectButton"></select>
+
+            <!--<select id="Country">-->
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="emissionBysector.html">
+                <input type="submit" value="Emission By Sector" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="CO2Emission.html">
+                <input type="submit" value="CO2 Emissions at a glance" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="plotly_bubble_CO2Emsn_GDP.html">
+                <input type="submit" value="Prosperity , Population and CO2 emission" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="map_CO2Emsn_2017.html">
+                <input type="submit" value="Map View CO2 emissions - 2017" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="x.html">
+                <input type="submit" value="Path to economic Development" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="area2.html">
+                <input type="submit" value="Area Chart - Emission By  Sector" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="y.html">
+                <input type="submit" value="Its Getting Better" />
+            </form>
+
+            <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
+            <form action="ML_slider.html">
+                <input type="submit" value="ML-Sliders" />
+            </form>
+
+            <!-- Color Scale -->
+            <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+        </div>
+
+        <!--------------------------------------------------------------->
+        <!----------------------------------------------------------------->
+
+        <div class="row">
+
+                <p>CO2 Emission by different industry sectors.</p>
+
+            <!--------------------------------------------------------------->
+            <!----------------------------------------------------------------->
+            <div class="centrecolumn">
+
+
+                <!-- Create a div where the graph will take place -->
+                <div id="my_dataviz"></div>
+                
+            </div>
+            
+            <div class="rightcolumn">
+                    <table>
+                            <tr>
+                              <th>Economy Sector</th>
+                            </tr>
+                            <tr>
+                              <td>OtherSources</td>
+                            </tr>
+                            <tr>
+                              <td>Waste	</td>
+                            </tr>
+                            <tr>
+                              <td>Industry	</td>
+                            </tr>
+                            <tr>
+                              <td>Residential_commercial	</td>
+                            </tr>
+                            <tr>
+                              <td>Transport	</td>
+                            </tr>
+                            <tr>
+                              <td>Agriculture	</td>
+                            </tr>
+                            <tr>
+                              <td>Forestry	</td>
+                            </tr>
+                            <tr>
+                              <td>LandUseSources</td>
+                            </tr>
+                            <tr>
+                              <td>Energy</td>
+                            </tr>
+                          </table>
+            </div>-->
+        </div>
+    </div>
+
+    <script>
+
+        // set the dimensions and margins of the graph
+        var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+            width = 800 - margin.left - margin.right,
+            height = 550 - margin.top - margin.bottom;
+
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        //Read the data
+        //d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv", function(data) {
+        d3.csv("../db/emsnBySectorByCountry.csv", function (data) {
+            // List of groups (here I have one group per column)
+            var allGroup = d3.map(data, function (d) { return (d.countryName) }).keys()
+
+            // add the options to the button
+            d3.select("#selectButton")
+                .selectAll('myOptions')
+                .data(allGroup)
+                .enter()
+                .append('option')
+                .text(function (d) { return d; }) // text showed in the menu
+                .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+
+            // A color scale: one color for each group
+            var myColor = d3.scaleOrdinal()
+                .domain(allGroup)
+                .range(d3.schemeSet2);
+
+            // Add X axis --> it is a date format
+            var x = d3.scaleLinear()
+                .domain(d3.extent(data, function (d) { return +d.year; }))
+                .range([0, width]);
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // text label for the x axis
+            svg.append("text")
+                .attr("transform",
+                    "translate(" + (width / 2) + " ," +
+                    (height + margin.top + 20) + ")")
+                .style("text-anchor", "right")
+                .text("Year");
+
+
+
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 10000000])
+                .range([height, 0]);
+            svg.append("g")
+                .call(d3.axisRight(y));
+
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("CO2 emissions metric tons per capita");
+
+
+
+            // Scale the range of the data
+            x.domain(d3.extent(data, function (d) { return +d.year; }));
+            y.domain([0, d3.max(data, function (d) {
+                return Math.max(d.Agriculture);
+            })]);
+
+            // Initialize line with first group of the list
+            var line1 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Agriculture) })
+                )
+                .attr("stroke", function (d) { return myColor("Agriculture") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line2 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.Year) })
+                    .y(function (d) { return y(+d.Industry) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line3 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Waste) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line4 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.OtherSources) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line5 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Forestry) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+
+
+            var line6 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Transport) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line7 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Residential_commercial) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line8 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.LandUseSources) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line9 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == allGroup[0] }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Energy) })
+                )
+                .attr("stroke", function (d) { return myColor("Value") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+
+
+
+            // A function that update the chart
+            function update(selectedGroup) {
+
+                // Create new data with the selection?
+                var dataFilter = data.filter(function (d) { return d.countryName == selectedGroup })
+
+                svg.selectAll("*").remove();    
+                          // Add X axis --> it is a date format
+            var x = d3.scaleLinear()
+                .domain(d3.extent(data, function (d) { return +d.year; }))
+                .range([0, width]);
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // text label for the x axis
+            svg.append("text")
+                .attr("transform",
+                    "translate(" + (width / 2) + " ," +
+                    (height + margin.top + 20) + ")")
+                .style("text-anchor", "right")
+                .text("Year");
+
+           
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, 5000000000])
+                .range([height, 0]);
+            svg.append("g")
+                .call(d3.axisRight(y));
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x", 0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text("CO2 emissions metric tons per capita");
+
+            if ( selectedGroup == "Australia" ||  selectedGroup == "USSR"||  selectedGroup == "India"  || selectedGroup == "Russia" || selectedGroup == "Australia & New Zealand") {
+          var y = d3.scaleLinear()
+          .domain([0, 600000000])
+          .range([ height, 0 ]);
+        
+          } else if 
+          ( selectedGroup == "Brazil" ||  selectedGroup == "Indonesia" ||  selectedGroup == "Canada"||  selectedGroup == "USSR"||  selectedGroup == "Western Europe"  ) {
+          var y = d3.scaleLinear()
+          .domain([0, 400000000])
+          .range([ height, 0 ]);
+        
+          }  
+          else if 
+          ( selectedGroup == "Eastern Africa" || selectedGroup == "Southern Europe" ||  selectedGroup == "Germany" ||  selectedGroup == "Japan"|| selectedGroup == "Northern Europe" ||  selectedGroup == "Southern Europe") {
+          var y = d3.scaleLinear()
+          .domain([0, 3000000000])
+          .range([ height, 0 ]);
+        
+          } else if  ( selectedGroup == "United States"  ) {
+          var y = d3.scaleLinear()
+          .domain([0, 12000000000])
+          .range([ height, 0 ]);
+           } else if  ( selectedGroup == "China"  ) {
+          var y = d3.scaleLinear()
+          .domain([0, 12000000000])
+          .range([ height, 0 ]);
+           } else 
+           {
+          var y = d3.scaleLinear()
+          .domain([0, 1000000000])
+          .range([ height, 0 ]);
+            } 
+
+
+            // Scale the range of the data
+            x.domain(d3.extent(data, function (d) { return +d.year; }));
+            y.domain([0, d3.max(data, function (d) {
+                return Math.max(d.Agriculture);
+            })]);
+            var line1 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Agriculture) })
+                )
+                .attr("stroke", function (d) { return myColor("Agriculture") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line2 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.Year) })
+                    .y(function (d) { return y(+d.Industry) })
+                )
+                .attr("stroke", function (d) { return myColor("ValIndustryue") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line3 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Waste) })
+                )
+                .attr("stroke", function (d) { return myColor("Waste") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line4 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.OtherSources) })
+                )
+                .attr("stroke", function (d) { return myColor("OtherSources") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line5 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Forestry) })
+                )
+                .attr("stroke", function (d) { return myColor("ValueForestry") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+
+
+            var line6 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Transport) })
+                )
+                .attr("stroke", function (d) { return myColor("Transport") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line7 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Residential_commercial) })
+                )
+                .attr("stroke", function (d) { return myColor("Residential_commercial") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line8 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.LandUseSources) })
+                )
+                .attr("stroke", function (d) { return myColor("LandUseSources") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+            var line9 = svg
+                .append('g')
+                .append("path")
+                .datum(data.filter(function (d) { return d.countryName == selectedGroup }))
+                .attr("d", d3.line()
+                    .x(function (d) { return x(d.year) })
+                    .y(function (d) { return y(+d.Energy) })
+                )
+                .attr("stroke", function (d) { return myColor("Energy") })
+                .style("stroke-width", 4)
+                .style("fill", "none")
+
+
+
+            }
+
+            // When the button is changed, run the updateChart function
+            d3.select("#selectButton").on("change", function (d) {
+                // recover the option that has been chosen
+                var selectedOption = d3.select(this).property("value")
+                // run the updateChart function with this selected option
+                update(selectedOption)
+            })
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

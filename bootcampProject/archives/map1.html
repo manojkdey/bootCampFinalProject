@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+  </head>
+  <body>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="//d3js.org/queue.v1.min.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+ 
+
+<!--We will display TopoJSON contents basing on the SVG support of browsers and D3. Let’s start by creating an svg element.-->
+<script>
+var width = 960,
+  height = 1160;
+
+var svg = d3.select('body').append('svg')
+           .attr('width', width)
+           .attr('height', height)
+           .attr('preserveAspectRatio', "xMidYMid meet")
+           .attr('viewBox', '0 0 900 900');
+
+var map = svg.append('g').attr('id', 'map');
+var departmeents = svg.append('g').attr('id', 'departments');
+var towns = svg.append('g').attr('id', 'towns');
+var shapes = svg.append('g').attr('id', 'shapes');
+var townsLabels = svg.append('g').attr('id', 'town-labels');
+//In the context of maps, we need to specify a projection according to what we want to display.
+//It can be configured using the d3.geo.conicConformal function.
+
+var projection = d3.geo.conicConformal() // Lambert-93
+          .center([2.454071, 47.279229]) // On centre la carte sur la France
+          .scale(2000)
+          .translate([width / 2, height / 2]);
+      var path =  d3.geo.path().projection(projection);
+
+
+</script>
+
+</body>
+</html>
