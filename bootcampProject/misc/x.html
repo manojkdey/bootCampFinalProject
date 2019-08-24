@@ -196,9 +196,11 @@
           <input type="submit" value="Its Getting Better" />
         </form>
         
-        <!-- <button onclick="emsnBySector()">Emission By Sector</button>-->
-        <form action="ML_slider.html">
-          <input type="submit" value="ML-Sliders" />
+
+        <p style="color:blue;">X-axis   --> Year </p>
+        <p style="color:blue;">   Y-Axis  --> GDPPerCapita_2011USDValue  </p>
+        <p style="color:blue;">   Bubbles --> CO2EmsnPerCapita         </p>
+        
         </form>
   <!-- Color Scale -->
       <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -210,7 +212,7 @@
 
     <div class="row">
 
-      <h4>Per Capita CO2 emission in Metric tons</h4>
+      <h4>Per Capita CO2 emission in Metric tons and per capita GDP over the years</h4>
 
       <!--------------------------------------------------------------->
       <!----------------------------------------------------------------->
@@ -221,9 +223,7 @@
 
         <!-- Create a div where the graph will take place -->
         <div id="myplot"></div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, Ut enim ad minim
-          veniam, quis nostrud exercitation ullamco.</p>
+       
 
       </div>
     </div>
@@ -277,12 +277,12 @@
         type: 'scatter',
         mode: 'markers',
         x: unpack(rows, 'year'),
-        y: unpack(rows, 'CO2EmsnPerCapita'),
+        y: unpack(rows, 'GDPPerCapita_2011USDValue'),
         text: unpack(rows, 'year'),
         marker: {
-          size: unpack(rows, 'GDPPerCapita_2011USDValue'),
+          size: unpack(rows, 'CO2EmsnPerCapita'),
           sizemode: "area",
-          sizeref: 1
+          sizeref: 0.005
         },
         transforms: [
           {
@@ -294,8 +294,8 @@
             type: 'groupby',
             groups: unpack(rows, 'year'),
             styles: [
-              { target: 'China', value: { marker: { color: 'red' } } },
               { target: 'United States', value: { marker: { color: 'green' } } },
+              { target: 'China', value: { marker: { color: 'red' } } },
               { target: 'Sweden', value: { marker: { color: 'purple' } } },
               { target: 'India', value: { marker: { color: 'orange' } } },
               { target: 'Russia', value: { marker: { color: 'blue' } } }
@@ -312,7 +312,7 @@
           l: 50,
           r: 50,
           b: 100,
-          t: 100,
+          t: 50,
           pad: 4
         },
         yaxis: {
@@ -337,12 +337,12 @@
           type: 'scatter',
           mode: 'markers',
           x: unpack(rows, 'year'),
-          y: unpack(rows, 'CO2EmsnPerCapita'),
+          y: unpack(rows, 'GDPPerCapita_2011USDValue'),
           text: unpack(rows, 'year'),
           marker: {
-            size: unpack(rows, 'GDPPerCapita_2011USDValue'),
+            size: unpack(rows, 'CO2EmsnPerCapita'),
             sizemode: "area",
-            sizeref: 1
+            sizeref: 0.005
           },
           transforms: [
             {
@@ -372,7 +372,7 @@
             l: 50,
             r: 50,
             b: 100,
-            t: 100,
+            t: 50,
             pad: 4
           },
           yaxis: {

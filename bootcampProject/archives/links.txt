@@ -56,5 +56,9 @@ create bootstrap sliders
       .call(d3.axisLeft(y));
   }
 
-
+http://bl.ocks.org/ZJONSSON/3918369
 d3.select (id = idname ).text("some value")
+
+
+
+
